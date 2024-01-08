@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { t } from "../functions/language";
+  import { language, t } from "../functions/language";
   import { convertFromMorse, convertToMorse } from "../functions/morse";
   let dot = ".";
   let dash = "-";
@@ -11,7 +11,7 @@
   const onInputChange = function () {
     clearTimeout(onChangeTimeout);
     onChangeTimeout = setTimeout(
-      () => (output = convertToMorse(input, dot, dash, "tr")),
+      () => (output = convertToMorse(input, dot, dash, $language)),
       500
     );
   };
