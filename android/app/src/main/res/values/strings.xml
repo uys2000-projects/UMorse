@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">umorse</string>
+    <string name="title_activity_main">umorse</string>
+    <string name="package_name">com.uys2000.umorse</string>
+    <string name="custom_url_scheme">com.uys2000.umorse</string>
+</resources>
