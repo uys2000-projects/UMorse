@@ -24,7 +24,7 @@
   };
 </script>
 
-<div class="flex flex-col gap-2 p-2 h-full">
+<div class="morse flex flex-col gap-2 p-2 h-full">
   <div class="flex gap-2">
     <input
       bind:value={dot}

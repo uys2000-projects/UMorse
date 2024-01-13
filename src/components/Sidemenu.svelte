@@ -21,7 +21,7 @@
 
 <div class="drawer drawer-end h-full flex flex-col">
   <input id="drawer" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content h-full flex flex-col">
+  <div class="drawer-content h-full flex flex-col overflow-hidden">
     <slot />
   </div>
   <div class="drawer-side overflow-hidden">
@@ -76,6 +76,11 @@
         >
           {$t("developer")}
         </a>
+      </li>
+      <li class="text-center">
+        <a class="underline" href="/#privacy-modal">
+          Privacy Policy (Only English)</a
+        >
       </li>
     </ul>
   </div>
