@@ -4,6 +4,7 @@ export const convertToMorse = function (
   text: string,
   dot: string,
   dash: string,
+  separatrix: string,
   lang = "tr" as "tr" | "en"
 ) {
   let lowerCaseText = "";
@@ -13,7 +14,7 @@ export const convertToMorse = function (
   const lowerCaseChars = lowerCaseText.split("");
   const morseChars = lowerCaseChars.map((lowerCaseChar) =>
     lowerCaseChar.replace(/(.)/g, (m) =>
-      m in morse ? morse[m as keyof typeof morse] : m == " " ? "/" : m
+      m in morse ? morse[m as keyof typeof morse] : m == " " ? separatrix : m
     )
   );
   const customMorseChars = morseChars.map((customMorseChar) =>
@@ -28,9 +29,10 @@ export const convertToMorse = function (
 export const convertFromMorse = function (
   text: string,
   dot: string,
-  dash: string
+  dash: string,
+  separatrix: string
 ) {
-  const customMorseWords = text.split("/");
+  const customMorseWords = text.split(separatrix);
   const words = customMorseWords.map((customMorseWord) => {
     const customMorseChars = customMorseWord.split(" ");
     const chars = customMorseChars.map((customMorseChar) => {
@@ -39,7 +41,7 @@ export const convertFromMorse = function (
         (m) => {
           if (m == dash) return "-";
           else if (m == dot) return ".";
-          else if (m == "/") return " ";
+          else if (m == separatrix) return " ";
           else return m;
         }
       );

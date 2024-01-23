@@ -2,6 +2,7 @@ export default {
   en: {
     dot: "Dot",
     dash: "Dash",
+    separatrix: "Separatrix",
     text: "Text",
     result: "Result",
     language: "Language",
@@ -13,6 +14,7 @@ export default {
   tr: {
     dot: "Nokta",
     dash: "Kısa Çizgi",
+    separatrix: "Slaş",
     text: "Metin",
     result: "Sonuç",
     language: "Dil",
