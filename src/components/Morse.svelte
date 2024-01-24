@@ -6,7 +6,7 @@
   import { share } from "../services/share";
   let dot = ".";
   let dash = "-";
-  let separatrix = "-";
+  let separatrix = "/";
   let input = "";
   let output = "";
 
