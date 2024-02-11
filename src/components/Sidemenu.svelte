@@ -3,9 +3,21 @@
   import { loadTheme, setTheme } from "../functions/theme";
   import { themes } from "../Themes/themes";
   import { loadLanguage, setLanguage, t } from "../functions/language";
-
+  import { getPrefence, setPrefence } from "../services/prefences";
+  import { textMemory, customizationMemory } from "../storage/prefences";
   let theme: Theme;
   let language: "tr" | "en";
+
+  getPrefence<boolean>("textMemory").then((val) => {
+    if (val) {
+      textMemory.set(val);
+    }
+  });
+  getPrefence<boolean>("customMemory").then((val) => {
+    if (val) {
+      customizationMemory.set(val);
+    }
+  });
 
   loadLanguage().then((lang) => {
     if (lang) language = lang;
@@ -16,6 +28,16 @@
     }, 100);
 
   const updateTheme = () => setTimeout(() => setTheme(theme), 100);
+
+  const changeCustomPrefence = () => {
+    customizationMemory.set(!$customizationMemory);
+    setPrefence("customMemory", $customizationMemory);
+  };
+  const changeTextPrefence = () => {
+    textMemory.set(!$textMemory);
+    setPrefence("textMemory", $textMemory);
+  };
+
   loadTheme().then((t) => (t ? (theme = t) : 0));
 </script>
 
@@ -67,6 +89,33 @@
             <option value={t.value}>{t.label}</option>
           {/each}
         </select>
+      </li>
+      <li>
+        Recall
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class="label-text">Customization</span>
+            <input
+              type="checkbox"
+              checked={$customizationMemory}
+              on:click={changeCustomPrefence}
+              class="checkbox"
+            />
+          </label>
+        </div>
+      </li>
+      <li>
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class="label-text">Text</span>
+            <input
+              type="checkbox"
+              checked={$textMemory}
+              on:click={changeTextPrefence}
+              class="checkbox"
+            />
+          </label>
+        </div>
       </li>
       <li class="mt-auto">
         <a
