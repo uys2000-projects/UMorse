@@ -140,26 +140,26 @@
       on:click={() => del(true)}
       class="btn flex-grow mx-1 p-1 flex-shrink-1"
     >
-      Delete
+      {$t("delete")}
     </button>
     <button
       on:click={() => copy(true)}
       class="btn flex-grow mx-1 p-1 flex-shrink-1"
     >
-      Copy
+      {$t("copy")}
     </button>
     <button
       on:click={() => paste(true)}
       class="btn flex-grow mx-1 p-1 flex-shrink-1"
     >
-      Paste
+      {$t("paste")}
     </button>
     {#if isApp()}
       <button
         on:click={() => share_(true)}
         class="btn flex-grow mx-1 p-1 flex-shrink-1"
       >
-        Share
+        {$t("share")}
       </button>
     {/if}
   </div>
@@ -176,26 +176,26 @@
       on:click={() => del(false)}
       class="btn flex-grow mx-1 p-1 flex-shrink-1"
     >
-      Delete
+      {$t("delete")}
     </button>
     <button
       on:click={() => copy(false)}
       class="btn flex-grow mx-1 p-1 flex-shrink-1"
     >
-      Copy
+      {$t("copy")}
     </button>
     <button
       on:click={() => paste(false)}
       class="btn flex-grow mx-1 p-1 flex-shrink-1"
     >
-      Paste
+      {$t("paste")}
     </button>
     {#if isApp()}
       <button
         on:click={() => share_(false)}
         class="btn flex-grow mx-1 p-1 flex-shrink-1"
       >
-        Share
+        {$t("share")}
       </button>
     {/if}
   </div>

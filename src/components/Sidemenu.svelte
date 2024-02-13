@@ -71,7 +71,7 @@
           tabindex="-1"
           class="select w-full max-w-xs"
         >
-          <option disabled selected>{$t("chooselanguage")}</option>
+          <option disabled>{$t("chooselanguage")}</option>
           <option value="tr">Türkçe</option>
           <option value="en">English</option>
         </select>
@@ -84,17 +84,17 @@
           tabindex="-1"
           class="select w-full max-w-xs"
         >
-          <option disabled selected>{$t("choosetheme")}</option>
+          <option disabled>{$t("choosetheme")}</option>
           {#each themes as t}
             <option value={t.value}>{t.label}</option>
           {/each}
         </select>
       </li>
       <li>
-        Recall
+        {$t("memory")}
         <div class="form-control">
           <label class="label cursor-pointer">
-            <span class="label-text">Customization</span>
+            <span class="label-text">{$t("customization")}</span>
             <input
               type="checkbox"
               checked={$customizationMemory}
@@ -102,12 +102,8 @@
               class="checkbox"
             />
           </label>
-        </div>
-      </li>
-      <li>
-        <div class="form-control">
-          <label class="label cursor-pointer">
-            <span class="label-text">Text</span>
+          <label class="label cursor-pointer -mt-3">
+            <span class="label-text">{$t("text")}</span>
             <input
               type="checkbox"
               checked={$textMemory}
