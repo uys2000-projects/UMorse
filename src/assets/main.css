@@ -1,0 +1,23 @@
+@import "./fonts.css";
+@import "./themes.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.h-screen{
+    height: 100vh;
+    height: 100dvh;
+}
+
+.min-h-screen{
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+
+.min-h-3\/4{
+    min-height: 75vh;
+    min-height: 75dvh;
+}
