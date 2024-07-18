@@ -6,6 +6,10 @@ import {
   addDoc as addDoc_,
   getDoc as getDoc_,
   getDocs as getDocs_,
+  deleteDoc as deleteDoc_,
+  query,
+  orderBy,
+  startAfter,
 } from "firebase/firestore/lite";
 import { app } from "./firebase";
 
@@ -29,4 +33,18 @@ export const getDoc = function (col: string, doc: string) {
 export const getDocs = function (col: string) {
   const colRef = collection(db, col);
   return getDocs_(colRef);
+};
+
+export const getOrderedDocs = function (col: string, timestamp = 0) {
+  const queryRef = query(
+    collection(db, col),
+    orderBy("timestamp"),
+    startAfter(timestamp)
+  );
+  return getDocs_(queryRef);
+};
+
+export const deleteDoc = function (col: string, doc: string) {
+  const docRef = doc_(db, col, doc);
+  return deleteDoc_(docRef);
 };

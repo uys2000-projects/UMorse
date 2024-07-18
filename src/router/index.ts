@@ -14,9 +14,9 @@ const router = createRouter({
           component: () => import("@/views/HomeView.vue"),
         },
         {
-          path: "/diary",
-          name: "DiaryView",
-          component: () => import("@/views/DiaryView.vue"),
+          path: "/history",
+          name: "HistoryView",
+          component: () => import("@/views/HistoryView.vue"),
         },
         {
           path: "/settings",

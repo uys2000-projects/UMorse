@@ -11,7 +11,7 @@ export default {
   <div class="navbar mobile desktop">
     <div class="flex w-full justify-around lg:hidden">
       <NavigateButton icon="draw" link="/" />
-      <NavigateButton icon="local_library" link="/diary" />
+      <NavigateButton icon="local_library" link="/history" />
       <NavigateButton icon="tune" link="/settings" />
     </div>
     <div class="desktop-menu">
@@ -23,7 +23,7 @@ export default {
           <NavigateButton icon="draw" link="/" />
         </li>
         <li>
-          <NavigateButton icon="local_library" link="/diary" />
+          <NavigateButton icon="local_library" link="/history" />
         </li>
         <li>
           <NavigateButton icon="tune" link="/settings" />

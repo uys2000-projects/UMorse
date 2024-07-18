@@ -19,41 +19,44 @@
               </span>
             </label>
           </li>
-          <li v-else>
-            <label class="label cursor-pointer">
-              <span class="label-text">Logout</span>
-              <span target="_blank" class="text-primary" @click="signOut">
-                <span class="material-symbols-rounded">
-                  logout
+          <template v-else>
+            <li>
+              <div class="tooltip" data-tip="This feature will be added soon.">
+                <SettingsToggle title="Automatic Synch" :value="false" :disabled="true" />
+              </div>
+            </li>
+            <li>
+              <label class="label cursor-pointer">
+                <span class="label-text">Manual Synch</span>
+                <span target="_blank" class="text-primary" @click="manualSync">
+                  <span class="material-symbols-rounded">
+                    sync
+                  </span>
                 </span>
-              </span>
-            </label>
-          </li>
-          <li>
-            <label class="label cursor-pointer">
-              <span class="label-text">Manual Synch</span>
-              <span target="_blank" class="text-primary">
-                <span class="material-symbols-rounded">
-                  sync
+              </label>
+            </li>
+            <li>
+              <label class="label cursor-pointer">
+                <span class="label-text">Logout</span>
+                <span target="_blank" class="text-primary" @click="signOut">
+                  <span class="material-symbols-rounded">
+                    logout
+                  </span>
                 </span>
-              </span>
-            </label>
-          </li>
-          <li>
-            <SettingsToggle title="Automatic Synch" v-model:value="autoSync" />
-          </li>
+              </label>
+            </li>
+          </template>
         </ul>
       </DaisyAccordion>
       <DaisyAccordion title="Application" class="rounded-btn bg-neutral text-neutral-content">
         <ul class="menu bg-base-200 rounded-box">
           <li>
-            <SettingsToggle title="Record Translates" v-model:value="recordTranslates" />
+            <SettingsToggle title="Remember Last Translate" :value="userStore.rememberLastTranslate"
+              @update:value="userStore.setRememberLastTranslate" />
           </li>
           <li>
-            <SettingsToggle title="Remember Last Translate" v-model:value="rememberLastTranslate" />
-          </li>
-          <li>
-            <SettingsToggle title="Remember Last Customization" v-model:value="rememberCusromizations" />
+            <SettingsToggle title="Remember Last Customization" :value="userStore.rememberCustomizations"
+              @update:value="userStore.setRememberCustomizations" />
           </li>
         </ul>
       </DaisyAccordion>
@@ -99,6 +102,7 @@ import DaisyAccordion from '@/components/daisy/DaisyAccordion.vue';
 import DaisyTheme from '@/components/daisy/DaisyTheme.vue';
 import { useUserStore } from '@/stores/user';
 import { signIn, signOut } from '@/services/auth';
+import { manualSync, updateSettings } from '@/functions/sync';
 export default {
   components: {
     SettingsLink,
@@ -111,14 +115,18 @@ export default {
     return {
       userStore: useUserStore(),
       autoSync: false,
-      recordTranslates: false,
       rememberLastTranslate: false,
       rememberCusromizations: false,
     }
   },
   methods: {
     signIn: () => signIn(),
-    signOut: () => signOut()
+    signOut: () => signOut(),
+    async manualSync() {
+      await manualSync(this.userStore.lastSync)
+      this.userStore.setLastSync()
+      await updateSettings(this.userStore.id, this.userStore.settings)
+    }
   }
 }
 </script>

@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col min-h-screen">
     <div
-      class="fixed top-0 py-1 px-8 text-lg lg:hidden left-1/2 -translate-x-1/2 bg-neutral text-neutral-content rounded-b-lg">
+      class="fixed top-0 py-1 px-8 text-lg lg:hidden left-1/2 -translate-x-1/2 bg-neutral text-neutral-content rounded-b-lg z-10">
       UMorse
     </div>
-    <div class="content flex-grow p-6 pt-12 py-20 lg:py-8 order-2">
+    <div class="flex flex-col flex-grow p-6 pt-14 pb-24 lg:py-8 order-2">
       <RouterView />
     </div>
     <TheHeader />

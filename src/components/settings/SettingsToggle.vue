@@ -1,7 +1,7 @@
 <template>
   <label class="label cursor-pointer">
     <span class="label-text">{{ title }}</span>
-    <input type="checkbox" class="toggle toggle-primary" v-model="_value" />
+    <input type="checkbox" class="toggle toggle-primary" :disabled="disabled" v-model="_value" />
   </label>
 </template>
 
@@ -15,6 +15,10 @@ export default {
     },
     value: {
       type: Boolean
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -26,6 +30,6 @@ export default {
         this.$emit("update:value", value)
       }
     }
-  }
+  },
 }
 </script>

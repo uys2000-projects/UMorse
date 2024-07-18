@@ -1,7 +1,7 @@
 <template>
   <div class="dropdown dropdown-end dropdown-bottom w-full h-full flex">
     <div tabindex="0" role="button" class="btn btn-lg btn-neutral w-full h-full p-2 capitalize justify-start">
-      {{ theme }}
+      {{ userStore.theme }}
     </div>
     <div tabindex="0"
       class="dropdown-content bg-neutral text-neutral-content max-h-60 overflow-auto flex flex-col flex-nowrap w-full rounded-md z-10">
@@ -24,10 +24,12 @@
 </template>
 
 <script lang="ts">
+import { useUserStore } from '@/stores/user';
+
 export default {
   data() {
     return {
-      theme: "theme",
+      userStore: useUserStore(),
       themes: [
         "light", "dark", "cupcake", "bumblebee", "emerald", "corporate", "synthwave", "retro", "cyberpunk", "valentine", "halloween", "garden", "forest", "aqua", "lofi", "pastel", "fantasy", "wireframe", "black", "luxury", "dracula", "cmyk", "autumn", "business", "acid", "lemonade", "night", "coffee", "winter", "dim", "nord", "sunset", "uysal"
       ]
@@ -35,17 +37,9 @@ export default {
   },
   methods: {
     setTheme(theme: string) {
-      this.theme = theme;
-      localStorage.setItem("theme", theme);
+      this.userStore.setTheme(theme)
       document.body.setAttribute("data-theme", theme)
     },
-    getTheme() {
-      const theme = localStorage.getItem("theme")
-      if (theme) this.setTheme(theme)
-    }
-  },
-  mounted() {
-    this.getTheme()
   }
 }
 </script>

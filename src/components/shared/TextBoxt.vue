@@ -2,28 +2,28 @@
   <div class="text-box">
     <textarea :placeholder="disabled ? 'Result will come here...' : 'Something for translation...'" :disabled="disabled"
       class="textarea textarea-primary textarea-bordered textarea-lg w-full max-w-full"
-      style="height: 25vh; height: 25dvh;"></textarea>
+      style="height: 25vh; height: 25dvh;" v-model="_value"></textarea>
     <select v-model="_toMorse" :disabled="disabled" class="select select-primary select-bordered">
-      <option :value="true" selected>From Morse</option>
-      <option :value="false">To Morse</option>
+      <option :value="true" selected>{{ disabled ? "Result" : "From Morse" }}</option>
+      <option :value="false">{{ disabled ? "Result" : "To Morse" }}</option>
     </select>
     <div class="buttons">
-      <button class="material-symbols-rounded" :disabled="disabled">
-        delete
+      <button v-if="!disabled" class="material-symbols-rounded" @click="deleteText">
+        mop
       </button>
-      <button class="material-symbols-rounded" :disabled="disabled">
+      <button class="material-symbols-rounded" @click="copyText">
         content_copy
       </button>
-      <button class="material-symbols-rounded" :disabled="disabled">
+      <button v-if="!disabled" class="material-symbols-rounded" @click="cutText">
         content_cut
       </button>
-      <button class="material-symbols-rounded" :disabled="disabled">
+      <button v-if="!disabled" class="material-symbols-rounded" @click="pasteText">
         content_paste
       </button>
-      <button class="material-symbols-rounded" :disabled="disabled">
+      <button class="material-symbols-rounded" @click="shareText">
         share
       </button>
-      <button class="material-symbols-rounded" :disabled="disabled">
+      <button class="material-symbols-rounded" @click="save">
         local_library
       </button>
     </div>
@@ -31,8 +31,11 @@
 </template>
 
 <script lang="ts">
+import { readClipboard, writeClipboard } from '@/services/clipboard';
+import { share } from '@/services/share';
+
 export default {
-  emits: ["update:toMorse"],
+  emits: ["update:toMorse", "update:value", "save"],
   props: {
     toMorse: {
       type: Boolean,
@@ -41,6 +44,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    value: {
+      type: String,
+      default: ""
     }
   },
   computed: {
@@ -51,6 +58,36 @@ export default {
       set(value: boolean) {
         this.$emit("update:toMorse", value)
       }
+    },
+    _value: {
+      get() {
+        return this.value
+      },
+      set(value: boolean) {
+        this.$emit("update:value", value)
+      }
+    }
+  },
+  methods: {
+    deleteText() {
+      this._value = "";
+    },
+    copyText() {
+      writeClipboard(this._value)
+    },
+    cutText() {
+      writeClipboard(this._value)
+      this._value = "";
+    },
+    async pasteText() {
+      const value = await readClipboard();
+      if (value) this._value = value;
+    },
+    shareText() {
+      share("Share", "Share", this._value, "umorse.mehmetuysal.dev")
+    },
+    save() {
+      this.$emit('save')
     }
   }
 }
