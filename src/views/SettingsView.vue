@@ -53,8 +53,8 @@
           <li>
             <label class="label cursor-pointer">
               <span class="label-text">{{ context.Language }}</span>
-              <label class="swap swap-active btn btn-sm btn-neutral" @click="changeLanguage">
-                <input type="checkbox" />
+              <label class="swap swap-active btn btn-sm btn-neutral">
+                <input type="checkbox" @click="changeLanguage" />
                 <div :class="contextStore.language == 'tr' ? 'swap-on' : 'swap-off'">TR</div>
                 <div :class="contextStore.language == 'en' ? 'swap-on' : 'swap-off'">EN</div>
               </label>

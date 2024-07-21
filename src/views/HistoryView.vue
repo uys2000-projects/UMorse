@@ -6,7 +6,7 @@
         @save:morse="(morse) => saveMorse(morse, index)" />
     </template>
     <div class="bg-base-100 w-full p-4 rounded-btn" v-if="morses.length == 0">
-      Noting Found, You can save.
+      {{ context.NotFound }}
     </div>
   </div>
 </template>
@@ -15,11 +15,18 @@
 import type { Morse } from "@/classes/morse";
 import HistoryBox from "../components/shared/HistoryBox.vue"
 import { deleteMorseFile, readMorseFile, readMorseFiles, setMorseFile } from "@/functions/morse";
+import { useContextStore } from "@/stores/context";
 export default {
   components: { HistoryBox },
   data() {
     return {
-      morses: [] as Morse[]
+      morses: [] as Morse[],
+      contextStore: useContextStore()
+    }
+  },
+  computed: {
+    context() {
+      return this.contextStore.context.HistoryPage ?? {}
     }
   },
   methods: {
