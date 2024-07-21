@@ -9,11 +9,14 @@ import { useUserStore } from './stores/user';
 import { getDoc } from './services/db';
 import { USERSETTINGS } from './classes/constants';
 import type { UserSettings } from './classes/user';
+import { useContextStore } from "./stores/context";
+import { getDeviceLanguage } from "./services/device";
 export default {
   components: { RouterView },
   data() {
     return {
-      userStore: useUserStore()
+      userStore: useUserStore(),
+      contextStore: useContextStore()
     }
   },
   methods: {
@@ -22,6 +25,10 @@ export default {
     },
   },
   async mounted() {
+    getDeviceLanguage().then((language) => {
+      this.contextStore.loadLanguage(language)
+    })
+
     await this.userStore.loadSettings()
     this.setTheme(this.userStore.theme)
 

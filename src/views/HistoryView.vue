@@ -5,6 +5,9 @@
         @delete:morse="(morse) => deleteMorse(morse, index)" @reload:morse="(morse) => reloadMorse(morse, index)"
         @save:morse="(morse) => saveMorse(morse, index)" />
     </template>
+    <div class="bg-base-100 w-full p-4 rounded-btn" v-if="morses.length == 0">
+      Noting Found, You can save.
+    </div>
   </div>
 </template>
 
@@ -31,6 +34,7 @@ export default {
     },
     saveMorse(morse: Morse, index: number) {
       setMorseFile(morse).then(() => {
+        morse.utimestamp = Date.now();
         this.morses[index] = morse;
       })
     },

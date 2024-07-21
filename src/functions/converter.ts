@@ -45,7 +45,6 @@ export const convertFromMorse = function (
           else return m;
         }
       );
-      console.log(morseChar);
       const char = morseChar.replace(morseChar.trim(), (m) => {
         const i = Object.values(morse).indexOf(m);
         if (i != -1) return Object.keys(morse)[i];

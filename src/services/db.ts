@@ -10,6 +10,7 @@ import {
   query,
   orderBy,
   startAfter,
+  where,
 } from "firebase/firestore/lite";
 import { app } from "./firebase";
 
@@ -35,10 +36,15 @@ export const getDocs = function (col: string) {
   return getDocs_(colRef);
 };
 
-export const getOrderedDocs = function (col: string, timestamp = 0) {
+export const getOrderedDocs = function (
+  col: string,
+  id: string,
+  timestamp = 0
+) {
   const queryRef = query(
     collection(db, col),
     orderBy("timestamp"),
+    where("uid", "==", id),
     startAfter(timestamp)
   );
   return getDocs_(queryRef);

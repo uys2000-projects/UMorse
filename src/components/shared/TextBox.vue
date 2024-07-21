@@ -1,11 +1,11 @@
 <template>
   <div class="text-box">
-    <textarea :placeholder="disabled ? 'Result will come here...' : 'Something for translation...'" :disabled="disabled"
+    <textarea :placeholder="disabled ? context.PlaceHolderResult : context.PlaceHolderConvert" :disabled="disabled"
       class="textarea textarea-primary textarea-bordered textarea-lg w-full max-w-full"
       style="height: 25vh; height: 25dvh;" v-model="_value"></textarea>
     <select v-model="_toMorse" :disabled="disabled" class="select select-primary select-bordered">
-      <option :value="true" selected>{{ disabled ? "Result" : "From Morse" }}</option>
-      <option :value="false">{{ disabled ? "Result" : "To Morse" }}</option>
+      <option :value="false" selected>{{ disabled ? context.SelectorResult : context.SelectorFromMorse }}</option>
+      <option :value="true">{{ disabled ? context.SelectorResult : context.SelectorToMorse }}</option>
     </select>
     <div class="buttons">
       <button v-if="!disabled" class="material-symbols-rounded" @click="deleteText">
@@ -33,9 +33,15 @@
 <script lang="ts">
 import { readClipboard, writeClipboard } from '@/services/clipboard';
 import { share } from '@/services/share';
+import { useContextStore } from '@/stores/context';
 
 export default {
   emits: ["update:toMorse", "update:value", "save"],
+  data() {
+    return {
+      contextStore: useContextStore()
+    }
+  },
   props: {
     toMorse: {
       type: Boolean,
@@ -66,6 +72,9 @@ export default {
       set(value: boolean) {
         this.$emit("update:value", value)
       }
+    },
+    context() {
+      return this.contextStore.context.TextBox ?? {};
     }
   },
   methods: {

@@ -11,32 +11,40 @@ import {
   writeFile,
 } from "@/services/filesystem";
 
-const MorseFolder = "morse/";
-const MorseExtension = "umorse";
+const mFolder = "morse";
+const mExtension = "umorse";
 // local Morse Functions
 export const setMorseFile = async function (morse: Morse) {
-  const name = `morse/${morse.timestamp}.unote`;
+  const name = `${mFolder}/${morse.timestamp}.${mExtension}`;
   return await writeFile(name, JSON.stringify(morse));
 };
 export const readMorseFile = async function (
   fileName: string,
-  extension: string = ".unote"
+  extension: string = mExtension
 ) {
-  return await readFile<Morse>("morse/" + fileName + extension);
+  const name = extension
+    ? `${mFolder}/${fileName}.${mExtension}`
+    : `${mFolder}/${fileName}`;
+  return await readFile<Morse>(name);
 };
 export const deleteMorseFile = async function (
   fileName: string,
-  extension: string = ".unote"
+  extension: string = mExtension,
+  removeTask = true
 ) {
-  return await deleteFile("morse/" + fileName + extension);
+  if (removeTask) setRemoveTask(fileName);
+  const name = extension
+    ? `${mFolder}/${fileName}.${mExtension}`
+    : `${mFolder}/${fileName}`;
+  return await deleteFile(name);
 };
 
 export const readMorseFolder = async function (
   callback: (file: FileInfo) => Promise<any>
 ) {
-  const { files } = await readDir(MorseFolder).catch(async () => {
-    await createFolder(MorseFolder);
-    return readDir(MorseFolder);
+  const { files } = await readDir(mFolder).catch(async () => {
+    await createFolder(mFolder);
+    return readDir(mFolder);
   });
   for (let index = 0; index < files.length; index++) {
     await callback(files[index]);
@@ -58,7 +66,7 @@ export const readMorseFiles = async function (
 };
 export const deleteMorseFiles = async function () {
   await readMorseFolder(async (file) => {
-    await deleteMorseFile(file.name, "");
+    await deleteMorseFile(file.name, "", false);
   });
 };
 
@@ -73,14 +81,15 @@ export const getRemoteMorse = async function (timestamp: number) {
   if (snapshot.exists()) return snapshot.data() as Morse;
   else return undefined;
 };
-export const deleteRemoteMorse = async function (morse: Morse) {
-  await deleteDoc(collection, morse.timestamp.toString());
+export const deleteRemoteMorse = async function (id: string) {
+  await deleteDoc(collection, id);
 };
 export const readAllRemoteMorses = async function (
+  id: string,
   callback: (morse: Morse) => Promise<void>,
   timestamp = 0
 ) {
-  const snapshot = await getOrderedDocs(collection, timestamp);
+  const snapshot = await getOrderedDocs(collection, id, timestamp);
   if (snapshot.empty) return;
 
   let _timestamp = timestamp;
@@ -89,9 +98,31 @@ export const readAllRemoteMorses = async function (
     _timestamp = morse.timestamp;
     await callback(morse);
   }
-  await readAllRemoteMorses(callback, _timestamp);
+  await readAllRemoteMorses(id, callback, _timestamp);
 };
 
 // Remote Morse Task
 
-export const createRemoveMorseTask = function (morse: Morse) {};
+const rtFolder = "rt";
+
+export const setRemoveTask = async function (fileName: string) {
+  const name = `${rtFolder}/${fileName}`;
+  return await writeFile(name, "");
+};
+
+export const deleteRemoveTask = async function (fileName: string) {
+  const name = `${rtFolder}/${fileName}`;
+  return await deleteFile(name);
+};
+
+export const readRemoveTaskFolder = async function (
+  callback: (file: FileInfo) => Promise<any>
+) {
+  const { files } = await readDir(rtFolder).catch(async () => {
+    await createFolder(rtFolder);
+    return readDir(rtFolder);
+  });
+  for (let index = 0; index < files.length; index++) {
+    await callback(files[index]);
+  }
+};
