@@ -384,11 +384,6 @@
   resolved "https://registry.yarnpkg.com/@capacitor/share/-/share-6.0.1.tgz#0cc5831eda0ec2257edec6ae39aa603e4cc7c2a9"
   integrity sha512-KQev3omYZ5hgjoZA+NdFZTuFyu1dd/ZIYkE0RnLBB11ZmFEmGRSCYdYtOyqkVxGU1n6FDDqgPPy13CvAZKWNPQ==
 
-"@capacitor/toast@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@capacitor/toast/-/toast-6.0.1.tgz#077793adcee76872ec95ff013ac3ae8838b356af"
-  integrity sha512-f3tpRcX60PhJoEDDokZc1+/aLWCNUvvlm9PjqJLEP2OYVYOay8NOBFsxut7j49YD6z6oN6NRd87sb7TI+CREvA==
-
 "@esbuild/aix-ppc64@0.21.5":
   version "0.21.5"
   resolved "https://registry.yarnpkg.com/@esbuild/aix-ppc64/-/aix-ppc64-0.21.5.tgz#c7184a326533fcdf1b8ee0733e21c713b975575f"
@@ -919,11 +914,6 @@
     "@ionic/utils-terminal" "2.3.5"
     debug "^4.0.0"
     tslib "^2.0.1"
-
-"@ionic/pwa-elements@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@ionic/pwa-elements/-/pwa-elements-3.3.0.tgz#971c806ebe410c677740f9e4b32bbf26ac29bb93"
-  integrity sha512-vbykpxd2nGRlA67AnqDwsiVf8PUmInLyi6lQdnPDjeiML1WZa0CPe6r632nGDV9PTi+sWNde9Xexg9SD6Pwyqw==
 
 "@ionic/utils-array@2.1.5":
   version "2.1.5"
