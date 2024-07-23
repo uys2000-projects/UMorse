@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "987245959056",
+    "project_id": "umorse-mehmetuysal-dev",
+    "storage_bucket": "umorse-mehmetuysal-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987245959056:android:78ac4ca7713b6031040515",
+        "android_client_info": {
+          "package_name": "com.uys2000.umorse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987245959056-hg7p26eft39h61kt37s644ce857u2f7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPpFZiaIP0HURa_d4tLD83ZnYKMmv0DCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987245959056-3fugjbdo7a6bqqr83dmtgca6k3duv6hr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-6530204715466484~3793261965"
+    }
+  ],
+  "configuration_version": "1"
+}

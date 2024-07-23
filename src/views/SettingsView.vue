@@ -21,7 +21,7 @@
           </li>
           <template v-else>
             <li>
-              <div class="tooltip" :data-tip="context.FeatureWillBeAdded">
+              <div class="tooltip text-left" :data-tip="context.FeatureWillBeAdded">
                 <SettingsToggle :title="context.AutoSync" :value="false" :disabled="true" />
               </div>
             </li>
@@ -131,11 +131,12 @@ import SettingsInfo from '@/components/settings/SettingsInfo.vue';
 import DaisyAccordion from '@/components/daisy/DaisyAccordion.vue';
 import DaisyTheme from '@/components/daisy/DaisyTheme.vue';
 import { useUserStore } from '@/stores/user';
-import { signIn, signOut } from '@/services/auth';
 import { checkSyncMethod, synchFromLocale, synchFromRemote, updateSettings } from '@/functions/sync';
 import DaisyModal from '@/components/daisy/DaisyModal.vue';
 import DaisyLoader from '@/components/daisy/DaisyLoader.vue';
 import { useContextStore } from '@/stores/context';
+import { signOut as signOutApp, signInWithGoogle } from '@/services/authentication';
+import { signOut, signWithIdToken } from '@/services/auth';
 export default {
   components: {
     SettingsLink,
@@ -160,8 +161,16 @@ export default {
     }
   },
   methods: {
-    signIn: () => signIn(),
-    signOut: () => signOut(),
+    signIn() {
+      signInWithGoogle().then(idToken => {
+        if (idToken) signWithIdToken(idToken)
+      })
+    },
+    signOut() {
+      signOutApp().then(() => {
+        signOut()
+      })
+    },
     async runAfterModal(callback: () => Promise<void>) {
       const modal = this.$refs.modal as typeof DaisyModal
       modal.close()
