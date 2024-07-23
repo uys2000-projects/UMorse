@@ -323,6 +323,13 @@
     "@babel/helper-validator-identifier" "^7.24.7"
     to-fast-properties "^2.0.0"
 
+"@capacitor-community/admob@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@capacitor-community/admob/-/admob-5.0.0.tgz#d5ba18013b074d63d8a6f2bb49c91b6b74ce3907"
+  integrity sha512-C8C+H4mRUTRChRQ73Jqc9lA6yAmrP54+pzrqmSMFoYiMQtI9L+2Y8M/b5HNafvRLoHl0VVoUPVQNW9vyyyi4gQ==
+  dependencies:
+    "@capacitor/core" next
+
 "@capacitor-firebase/authentication@^6.1.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@capacitor-firebase/authentication/-/authentication-6.1.0.tgz#ae2b32351477d070eabfd4d53c1ea8d64004b841"
@@ -366,6 +373,13 @@
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-6.1.1.tgz#7bdf19a28a9f345a2f31179264b6de2bd9de29cb"
   integrity sha512-b1s4WDMy3Y1/owTG2/XNGCI6G5SDpF2NT1JMAgcShue13fiAuHA+Ans7Wfei6McvR0KdopAE6tMHmDAfL5PM8Q==
+  dependencies:
+    tslib "^2.1.0"
+
+"@capacitor/core@next":
+  version "6.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-6.0.0-rc.2.tgz#437d2d09a79a58af5921e359a647c7db2e67b977"
+  integrity sha512-DqqhZZzXr5vR2uks8p8rOuBRhqkeuaKobp1h6sS20naRbvFvspIO1nFWHOvAUV5olWR1nnmPiCrtRkEUHVLFRg==
   dependencies:
     tslib "^2.1.0"
 

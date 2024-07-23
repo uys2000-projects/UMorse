@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col flex-grow gap-4 p-4 bg-neutral rounded-btn shadow-lg">
+  <div ref="morse-content" class="flex flex-col flex-grow gap-4 p-4 bg-neutral rounded-btn shadow-lg">
     <div class="flex flex-nowrap gap-4">
       <input type="text" :placeholder="context.Dot" v-model="morse.dot" @change="rememberSyncher"
         class="input input-primary input-bordered w-full text-center lg:text-left max-w-28" />
@@ -98,6 +98,7 @@ export default {
     if (lastMorse) { this.morse = lastMorse; this.convert(); }
   }
 };
+
 </script>
 
 <style scoped>
