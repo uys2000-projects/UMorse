@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-2 w-full lg:w-[calc(50%-.5rem)]">
+  <div class="flex flex-col gap-2 w-full lg:w-[calc(50%-.5rem)] h-auto">
     <div ref="carousel" class="carousel">
       <div class="carousel-item">
         <div class="relative pb-2">

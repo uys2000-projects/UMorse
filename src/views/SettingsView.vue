@@ -1,102 +1,104 @@
 <template>
   <div class="flex flex-col gap-4 shadow-lg p-4 rounded-md">
-    <div class="flex flex-col gap-1">
-      <div class="flex flex-col gap-4">
-        <div class="bg-black rounded-lg">
-          <img src="/logo.jpg" alt="logo" class="h-40 m-auto">
+    <div class="flex flex-col gap-1 lg:flex-row">
+      <div class="flex flex-col gap-4 lg:w-full h-auto flex-grow">
+        <div class="bg-black rounded-lg h-full flex flex-col">
+          <img src=" /logo.jpg" alt="logo" class="h-40 m-auto">
         </div>
       </div>
-      <DaisyTheme />
-      <DaisyAccordion :title="context.Sync" class="rounded-btn bg-neutral text-neutral-content">
-        <ul class="menu bg-base-200 rounded-box">
-          <li v-if="!userStore.isAuthenticated">
-            <label class="label cursor-pointer">
-              <span class="label-text">{{ context.Login }}</span>
-              <span target="_blank" class="text-primary" @click="signIn">
-                <span class="material-symbols-rounded">
-                  login
-                </span>
-              </span>
-            </label>
-          </li>
-          <template v-else>
-            <li>
-              <div class="tooltip text-left" :data-tip="context.FeatureWillBeAdded">
-                <SettingsToggle :title="context.AutoSync" :value="false" :disabled="true" />
-              </div>
-            </li>
-            <li>
+      <div class="flex flex-col gap-1 lg:w-full">
+        <DaisyTheme />
+        <DaisyAccordion :title="context.Sync" class="rounded-btn bg-neutral text-neutral-content flex-shrink-0">
+          <ul class="menu bg-base-200 rounded-box">
+            <li v-if="!userStore.isAuthenticated">
               <label class="label cursor-pointer">
-                <span class="label-text">{{ context.ManualSync }}</span>
-                <span target="_blank" class="text-primary" @click="checkSyncMethod">
+                <span class="label-text">{{ context.Login }}</span>
+                <span target="_blank" class="text-primary" @click="signIn">
                   <span class="material-symbols-rounded">
-                    sync
+                    login
                   </span>
                 </span>
               </label>
             </li>
+            <template v-else>
+              <li>
+                <div class="tooltip text-left" :data-tip="context.FeatureWillBeAdded">
+                  <SettingsToggle :title="context.AutoSync" :value="false" :disabled="true" />
+                </div>
+              </li>
+              <li>
+                <label class="label cursor-pointer">
+                  <span class="label-text">{{ context.ManualSync }}</span>
+                  <span target="_blank" class="text-primary" @click="checkSyncMethod">
+                    <span class="material-symbols-rounded">
+                      sync
+                    </span>
+                  </span>
+                </label>
+              </li>
+              <li>
+                <label class="label cursor-pointer">
+                  <span class="label-text">{{ context.Logout }}</span>
+                  <span target="_blank" class="text-primary" @click="signOut">
+                    <span class="material-symbols-rounded">
+                      logout
+                    </span>
+                  </span>
+                </label>
+              </li>
+            </template>
+          </ul>
+        </DaisyAccordion>
+        <DaisyAccordion :title="context.Application" class="rounded-btn bg-neutral text-neutral-content flex-shrink-0">
+          <ul class="menu bg-base-200 rounded-box">
             <li>
               <label class="label cursor-pointer">
-                <span class="label-text">{{ context.Logout }}</span>
-                <span target="_blank" class="text-primary" @click="signOut">
-                  <span class="material-symbols-rounded">
-                    logout
-                  </span>
-                </span>
+                <span class="label-text">{{ context.Language }}</span>
+                <label class="swap swap-active btn btn-sm btn-neutral">
+                  <input type="checkbox" @click="changeLanguage" />
+                  <div :class="contextStore.language == 'tr' ? 'swap-on' : 'swap-off'">TR</div>
+                  <div :class="contextStore.language == 'en' ? 'swap-on' : 'swap-off'">EN</div>
+                </label>
               </label>
             </li>
-          </template>
-        </ul>
-      </DaisyAccordion>
-      <DaisyAccordion :title="context.Application" class="rounded-btn bg-neutral text-neutral-content">
-        <ul class="menu bg-base-200 rounded-box">
-          <li>
-            <label class="label cursor-pointer">
-              <span class="label-text">{{ context.Language }}</span>
-              <label class="swap swap-active btn btn-sm btn-neutral">
-                <input type="checkbox" @click="changeLanguage" />
-                <div :class="contextStore.language == 'tr' ? 'swap-on' : 'swap-off'">TR</div>
-                <div :class="contextStore.language == 'en' ? 'swap-on' : 'swap-off'">EN</div>
-              </label>
-            </label>
-          </li>
-          <li>
-            <SettingsToggle :title="context.RememberLastTranslate" :value="userStore.rememberLastTranslate"
-              @update:value="userStore.setRememberLastTranslate" />
-          </li>
-          <li>
-            <SettingsToggle :title="context.RememberCustomizations" :value="userStore.rememberCustomizations"
-              @update:value="userStore.setRememberCustomizations" />
-          </li>
-        </ul>
-      </DaisyAccordion>
-      <DaisyAccordion :title="context.Info" class="rounded-btn bg-neutral text-neutral-content">
-        <ul class="menu bg-base-200 rounded-box">
-          <li>
-            <SettingsLink :title="context.DeveloperWebPage" link="https://mehmetuysal.dev" />
-          </li>
-          <li>
-            <SettingsLink :title="context.UmorseWebPage" link="https://umorse.mehmetuysal.dev" />
-          </li>
-          <li>
-            <SettingsLink :title="context.ShortLinkWebPage" link="https://url.mehmetuysal.dev" />
-          </li>
-          <li>
-            <SettingsLink :title="context.PrivacyPolicy" link="https://mehmetuysal.dev/privacy/umorse" />
-          </li>
-        </ul>
-        <ul class="menu bg-base-200 rounded-box mt-2">
-          <li>
-            <SettingsInfo :title="context.Contact" link="mailto:hi@mehmetuysal.dev" value="hi@mehmetuysal.dev" />
-          </li>
-          <li>
-            <SettingsInfo :title="context.Developer" value="Mehmet Uysal" />
-          </li>
-          <li>
-            <SettingsInfo :title="context.Version" value="2.0.0" />
-          </li>
-        </ul>
-      </DaisyAccordion>
+            <li>
+              <SettingsToggle :title="context.RememberLastTranslate" :value="userStore.rememberLastTranslate"
+                @update:value="userStore.setRememberLastTranslate" />
+            </li>
+            <li>
+              <SettingsToggle :title="context.RememberCustomizations" :value="userStore.rememberCustomizations"
+                @update:value="userStore.setRememberCustomizations" />
+            </li>
+          </ul>
+        </DaisyAccordion>
+        <DaisyAccordion :title="context.Info" class="rounded-btn bg-neutral text-neutral-content flex-shrink-0">
+          <ul class="menu bg-base-200 rounded-box">
+            <li>
+              <SettingsLink :title="context.DeveloperWebPage" link="https://mehmetuysal.dev" />
+            </li>
+            <li>
+              <SettingsLink :title="context.UmorseWebPage" link="https://umorse.mehmetuysal.dev" />
+            </li>
+            <li>
+              <SettingsLink :title="context.ShortLinkWebPage" link="https://url.mehmetuysal.dev" />
+            </li>
+            <li>
+              <SettingsLink :title="context.PrivacyPolicy" link="https://mehmetuysal.dev/privacy/umorse" />
+            </li>
+          </ul>
+          <ul class="menu bg-base-200 rounded-box mt-2">
+            <li>
+              <SettingsInfo :title="context.Contact" link="mailto:hi@mehmetuysal.dev" value="hi@mehmetuysal.dev" />
+            </li>
+            <li>
+              <SettingsInfo :title="context.Developer" value="Mehmet Uysal" />
+            </li>
+            <li>
+              <SettingsInfo :title="context.Version" value="2.0.0" />
+            </li>
+          </ul>
+        </DaisyAccordion>
+      </div>
     </div>
     <DaisyModal ref="modal">
       <template v-if="showRemoteSyncModal">

@@ -328,15 +328,15 @@
   resolved "https://registry.yarnpkg.com/@capacitor-firebase/authentication/-/authentication-6.1.0.tgz#ae2b32351477d070eabfd4d53c1ea8d64004b841"
   integrity sha512-mJbbCJFhKi/aKNuoDKAgC98EgRSfg0LxoM5lDoGqQrMwp75WDvOSxsjMUMtuuKFKJ9ASofnVYvJ3aigCpLyssw==
 
-"@capacitor/android@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-6.1.0.tgz#68a64de088f2a42dafa3bcbcdeba860ca33e2fc4"
-  integrity sha512-S4PW4N5xtKHTrICjG7bkBhI70jdXbb+8nbm1pJpuXChCD0gkCcofJhPaw4bCoO0egcugBN1U7DkegNw5jWpHcw==
+"@capacitor/android@6.1.1":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-6.1.1.tgz#a0843ddea92cc9739739a82a8fcd2ed6b1eaab8a"
+  integrity sha512-rhO/nH6NJizGV5KizoIoGxCmkos3HnyUzI9TNv8IVy/C8h6lPM5Gt9cxGclb6k0OBTtgv6iJVo654+m4kzv0Qg==
 
-"@capacitor/cli@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@capacitor/cli/-/cli-6.1.0.tgz#d90cf2e64afc20cc34848594d4733237f204bbef"
-  integrity sha512-HEKDh3+FuNZKFHmSDZ7nAnaX3bzhtznYk9GsZBMac1y4CTAxIykPX9wzZ3DzLeM/EbMBGFClUbefkIkimAyfYg==
+"@capacitor/cli@6.1.1":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/cli/-/cli-6.1.1.tgz#ff8423fef26572ba73177c62c8677e77968fc4c6"
+  integrity sha512-rsRqEadfnBSUX90RZj59oXvi30bpSusLMfIcgbOIArOloTgfaaWr9R471F6m3gGWF7BhNoskJpZcCgSUsfywwA==
   dependencies:
     "@ionic/cli-framework-output" "^2.2.5"
     "@ionic/utils-fs" "^3.1.6"
@@ -362,10 +362,10 @@
   resolved "https://registry.yarnpkg.com/@capacitor/clipboard/-/clipboard-6.0.0.tgz#783d6759dda471eef7e30d6a49c7a80bf81ad053"
   integrity sha512-NjcGr2jncSZy9NM9grePo8zz0hhBYYBYZV71xXjLvJhVY4PSdZD/Sj+4jm0pvlOKSK8vAXYyF6VcWT4/Kh/xmw==
 
-"@capacitor/core@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-6.1.0.tgz#1b4a93f3d5976ce3fd4a7f1b797c48c1243ec934"
-  integrity sha512-Kt4ONm0X9xxJXn9Q73oBaKdzep5B/VJw3VjXa2eGul4cD2k37mJwgjpXSMRnLH0Aju5bCiRL8J/hMAfTlokO6A==
+"@capacitor/core@6.1.1":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-6.1.1.tgz#7bdf19a28a9f345a2f31179264b6de2bd9de29cb"
+  integrity sha512-b1s4WDMy3Y1/owTG2/XNGCI6G5SDpF2NT1JMAgcShue13fiAuHA+Ans7Wfei6McvR0KdopAE6tMHmDAfL5PM8Q==
   dependencies:
     tslib "^2.1.0"
 
@@ -1284,10 +1284,17 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0", "@types/node@^20.14.5":
+"@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0":
   version "20.14.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.14.9.tgz#12e8e765ab27f8c421a1820c99f5f313a933b420"
   integrity sha512-06OCtnTXtWOZBJlRApleWndH4JsRVs1pDCc8dLSQp+7PpUpX3ePdHyeNSFTeSe7FtKyQkrlPvHwJOW3SLd8Oyg==
+  dependencies:
+    undici-types "~5.26.4"
+
+"@types/node@20.14.11":
+  version "20.14.11"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.14.11.tgz#09b300423343460455043ddd4d0ded6ac579b74b"
+  integrity sha512-kprQpL8MMeszbz6ojB5/tU8PLN4kesnN8Gjzw349rDlNgsSzg90lAVj3llK99Dh7JON+t9AuscPPFW6mPbTnSA==
   dependencies:
     undici-types "~5.26.4"
 
