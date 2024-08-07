@@ -1,5 +1,11 @@
 <template>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <transition>
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </transition>
+  </router-view>
 </template>
 <script lang="ts">
 import "@/assets/main.css";
@@ -11,8 +17,9 @@ import { USERSETTINGS } from './classes/constants';
 import type { UserSettings } from './classes/user';
 import { useContextStore } from "./stores/context";
 import { getDeviceLanguage } from "./services/device";
+import { KeepAlive } from "vue";
 export default {
-  components: { RouterView },
+  components: { RouterView, KeepAlive },
   data() {
     return {
       userStore: useUserStore(),

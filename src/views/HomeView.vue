@@ -1,17 +1,17 @@
 <template>
   <div ref="morse-content" class="flex flex-col flex-grow gap-4 p-4 bg-neutral rounded-btn shadow-lg">
     <div class="flex flex-nowrap gap-4">
-      <input type="text" :placeholder="context.Dot" v-model="morse.dot" @change="rememberSyncher"
+      <input type="text" :placeholder="context.Dot" v-model="userStore.morse.dot" @change="rememberSyncher"
         class="input input-primary input-bordered w-full text-center lg:text-left max-w-28" />
-      <input type="text" :placeholder="context.Dash" v-model="morse.dash" @change="rememberSyncher"
+      <input type="text" :placeholder="context.Dash" v-model="userStore.morse.dash" @change="rememberSyncher"
         class="input input-primary input-bordered w-full text-center lg:text-left max-w-28" />
-      <input type="text" :placeholder="context.Slash" v-model="morse.slash" @change="rememberSyncher"
+      <input type="text" :placeholder="context.Slash" v-model="userStore.morse.slash" @change="rememberSyncher"
         class="input input-primary input-bordered w-full text-center lg:text-left max-w-28" />
     </div>
     <div class="containers flex-grow">
-      <TextBox v-model:to-morse="toMorse" @update:to-morse="toMorseChanged" v-model:value="morse.text"
-        @update:value="textChanged" @save="save" />
-      <TextBox :to-morse="!toMorse" disabled v-model:value="result" @save="save" />
+      <TextBox v-model:to-morse="userStore.toMorse" @update:to-morse="toMorseChanged"
+        v-model:value="userStore.morse.text" @update:value="textChanged" @save="save" />
+      <TextBox :to-morse="!userStore.toMorse" disabled v-model:value="userStore.result" @save="save" />
     </div>
   </div>
 </template>
@@ -29,21 +29,18 @@ export default {
   data() {
     return {
       updater: 0,
-      toMorse: true,
-      morse: new Morse(),
       userStore: useUserStore(),
       contextStore: useContextStore(),
-      result: "",
     };
   },
   methods: {
     getMorse() {
-      const morse = { ...this.morse }
+      const morse = { ...this.userStore.morse }
       morse.timestamp = Date.now();
       morse.utimestamp = Date.now();
       if (this.userStore.isAuthenticated)
         morse.uid = this.userStore.id
-      if (!this.toMorse) morse.text = convertFromMorse(
+      if (!this.userStore.toMorse) morse.text = convertFromMorse(
         morse.text,
         morse.dot,
         morse.dash,
@@ -53,12 +50,12 @@ export default {
       return morse;
     },
     convert() {
-      const convert = this.toMorse ? convertToMorse : convertFromMorse;
-      this.result = convert(
-        this.morse.text,
-        this.morse.dot,
-        this.morse.dash,
-        this.morse.slash,
+      const convert = this.userStore.toMorse ? convertToMorse : convertFromMorse;
+      this.userStore.result = convert(
+        this.userStore.morse.text,
+        this.userStore.morse.dot,
+        this.userStore.morse.dash,
+        this.userStore.morse.slash,
         "en"
       )
       this.rememberSyncher()
@@ -67,7 +64,7 @@ export default {
       setMorseFile(this.getMorse())
     },
     rememberSyncher() {
-      const morse = { ...this.morse }
+      const morse = { ...this.userStore.morse }
       if (!this.userStore.rememberCustomizations) {
         morse.dot = "."
         morse.dash = "-"
@@ -79,12 +76,12 @@ export default {
       setPreferences("lastMorse", morse)
     },
     textChanged(value: string) {
-      this.morse.text = value;
+      this.userStore.morse.text = value;
       clearTimeout(this.updater);
       this.updater = setTimeout(this.convert, 500);
     },
     toMorseChanged() {
-      setPreferences("toMorse", this.toMorse.toString())
+      setPreferences("toMorse", this.userStore.toMorse.toString())
     }
   },
   computed: {
@@ -93,9 +90,12 @@ export default {
     }
   },
   async mounted() {
-    this.toMorse = await getPreferences<boolean>("toMorse") != false
-    const lastMorse = await getPreferences<Morse>("lastMorse")
-    if (lastMorse) { this.morse = lastMorse; this.convert(); }
+    if (this.userStore.firstOpen) {
+      this.userStore.firstOpen = false;
+      this.userStore.toMorse = await getPreferences<boolean>("toMorse") != false
+      const lastMorse = await getPreferences<Morse>("lastMorse")
+      if (lastMorse) { this.userStore.morse = lastMorse; this.convert(); }
+    }
   }
 };
 

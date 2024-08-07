@@ -48,7 +48,7 @@ export default {
   },
   mounted() {
     readMorseFiles(async (morse) => {
-      this.morses.push(morse)
+      this.morses.unshift(morse)
     })
   }
 }

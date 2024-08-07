@@ -46,6 +46,9 @@
                   </span>
                 </label>
               </li>
+              <li>
+                <SettingsLink :title="context.DeleteMyAccount" link="https://mehmetuysal.dev" />
+              </li>
             </template>
           </ul>
         </DaisyAccordion>
@@ -68,6 +71,10 @@
             <li>
               <SettingsToggle :title="context.RememberCustomizations" :value="userStore.rememberCustomizations"
                 @update:value="userStore.setRememberCustomizations" />
+            </li>
+            <li>
+              <SettingsToggle :title="context.ShowStartAdd" :value="userStore.showStartAdd"
+                @update:value="userStore.setStartAdd" />
             </li>
           </ul>
         </DaisyAccordion>

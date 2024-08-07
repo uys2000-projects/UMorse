@@ -101,10 +101,10 @@ export default {
       writeClipboard(this.morse.text)
     },
     shareMorse() {
-      share("Share", "Share", this._Morse.morse, "umorse.mehmetuysal.dev")
+      share("Share", "Share", this._Morse.morse, "https://umorse.mehmetuysal.dev")
     },
     shareText() {
-      share("Share", "Share", this.morse.text, "umorse.mehmetuysal.dev")
+      share("Share", "Share", this.morse.text, "https://umorse.mehmetuysal.dev")
     },
     toNext() {
       this.isFirstPage = false;

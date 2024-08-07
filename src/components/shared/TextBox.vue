@@ -93,7 +93,7 @@ export default {
       if (value) this._value = value;
     },
     shareText() {
-      share("Share", "Share", this._value, "umorse.mehmetuysal.dev")
+      share("Share", "Share", this._value, "https://umorse.mehmetuysal.dev")
     },
     save() {
       this.$emit('save')

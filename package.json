@@ -23,6 +23,7 @@
     "firebase": "^10.12.2",
     "google-one-tap": "^1.0.6",
     "pinia": "^2.1.7",
+    "u-logger": "https://github.com/uys2000-projects/ULogger",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
@@ -31,6 +32,7 @@
     "@tailwindcss/typography": "^0.5.13",
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "20.14.11",
+    "@types/u-logger": "https://github.com/uys2000-projects/Types-Ulogger",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.19",

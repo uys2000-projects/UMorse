@@ -7,9 +7,13 @@ import { Morse } from "@/classes/morse";
 export const useUserStore = defineStore("user", {
   state: () => {
     return {
+      firstOpen: true,
       id: "",
       settings: new UserSettings(),
       lastMorse: new Morse(),
+      toMorse: true,
+      morse: new Morse(),
+      result: "",
     };
   },
   getters: {
@@ -19,6 +23,7 @@ export const useUserStore = defineStore("user", {
     autoSync: (state) => state.settings.autoSync,
     rememberLastTranslate: (state) => state.settings.rememberLastTranslate,
     rememberCustomizations: (state) => state.settings.rememberCustomizations,
+    showStartAdd: (state) => state.settings.showStartAdd,
     lastSync: (state) => state.settings.lastSync,
   },
   actions: {
@@ -42,6 +47,10 @@ export const useUserStore = defineStore("user", {
     },
     setRememberCustomizations(value: boolean) {
       this.settings.rememberCustomizations = value;
+      this.updateSettings();
+    },
+    setStartAdd(value: boolean) {
+      this.settings.showStartAdd = value;
       this.updateSettings();
     },
     setLastSync(value = Date.now()) {

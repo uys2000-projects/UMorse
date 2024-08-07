@@ -4,6 +4,7 @@ export class UserSettings {
   autoSync!: boolean;
   rememberLastTranslate!: boolean;
   rememberCustomizations!: boolean;
+  showStartAdd!: boolean;
 
   dot!: string;
   dash!: string;
@@ -16,6 +17,7 @@ export class UserSettings {
     autoSync = false,
     rememberLastTranslate = false,
     rememberCustomizations = false,
+    showStartAdd = true,
 
     dot = ".",
     dash = "-",
@@ -27,6 +29,7 @@ export class UserSettings {
     this.autoSync = autoSync;
     this.rememberLastTranslate = rememberLastTranslate;
     this.rememberCustomizations = rememberCustomizations;
+    this.showStartAdd = showStartAdd;
 
     this.dot = dot;
     this.dash = dash;
