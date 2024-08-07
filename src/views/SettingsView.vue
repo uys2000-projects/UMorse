@@ -72,10 +72,12 @@
               <SettingsToggle :title="context.RememberCustomizations" :value="userStore.rememberCustomizations"
                 @update:value="userStore.setRememberCustomizations" />
             </li>
-            <li>
-              <SettingsToggle :title="context.ShowStartAdd" :value="userStore.showStartAdd"
-                @update:value="userStore.setStartAdd" />
-            </li>
+            <template v-if="isMobile">
+              <li>
+                <SettingsToggle :title="context.ShowStartAdd" :value="userStore.showStartAdd"
+                  @update:value="userStore.setStartAdd" />
+              </li>
+            </template>
           </ul>
         </DaisyAccordion>
         <DaisyAccordion :title="context.Info" class="rounded-btn bg-neutral text-neutral-content flex-shrink-0">
@@ -146,6 +148,7 @@ import DaisyLoader from '@/components/daisy/DaisyLoader.vue';
 import { useContextStore } from '@/stores/context';
 import { signOut as signOutApp, signInWithGoogle } from '@/services/authentication';
 import { signOut, signWithIdToken } from '@/services/auth';
+import { getDeviceInfo, getDevicePlatformInfo } from '@/services/device';
 export default {
   components: {
     SettingsLink,
@@ -158,6 +161,7 @@ export default {
   },
   data() {
     return {
+      isMobile: false,
       userStore: useUserStore(),
       contextStore: useContextStore(),
       showRemoteSyncModal: false,
@@ -211,6 +215,9 @@ export default {
       if (this.contextStore.language == 'tr') this.contextStore.setLanguage("en")
       else this.contextStore.setLanguage("tr")
     }
+  },
+  async mounted() {
+    this.isMobile = await getDevicePlatformInfo() != "web"
   }
 }
 </script>
